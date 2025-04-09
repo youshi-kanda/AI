@@ -1,0 +1,562 @@
+
+/* ---------------------------- */
+/* 全体スタイルのアップグレード */
+/* ---------------------------- */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', sans-serif;
+    background: #fffaf6;
+    color: #333;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* 中央の白いボックス */
+.container {
+    width: 100%;
+    max-width: 420px;
+    background-color: #fff;
+    margin-top: 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* ---------------------------- */
+/* 波型ヘッダー（グラデーション） */
+/* ---------------------------- */
+.wave-header {
+    position: relative;
+    height: 160px;
+    background: linear-gradient(135deg, #ffb774, #ff934f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.wave-header h1 {
+    margin-top: 30px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    z-index: 2;
+    letter-spacing: 1px;
+}
+
+/* 波の描画 */
+.wave {
+    position: absolute;
+    height: 100px;
+    width: 100%;
+    background: linear-gradient(135deg, #ffb774, #ff934f);
+    bottom: 0;
+    z-index: 1;
+}
+
+.wave::before,
+.wave::after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 100% 50%;
+}
+
+.wave::before {
+    width: 55%;
+    height: 110%;
+    background-color: #fff;
+    right: -1.5%;
+    top: 65%;
+}
+
+.wave::after {
+    width: 55%;
+    height: 100%;
+    background-color: rgba(255, 186, 120, 0.85);
+    left: -1.5%;
+    top: 55%;
+}
+
+/* ---------------------------- */
+/* フォームエリア装飾 */
+/* ---------------------------- */
+.form {
+    padding: 20px 20px 10px;
+    box-sizing: border-box;
+}
+
+.form label {
+    display: block;
+    margin: 15px 0 8px;
+    color: #f18700;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.form input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    font-size: 15px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    background-color: #fff;
+}
+
+/* 登録ボタン */
+.register-btn {
+    display: block;
+    width: 100%;
+    background: linear-gradient(90deg, #ffa400, #ff7800);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    margin: 20px 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(255, 120, 0, 0.3);
+    transition: background 0.3s, transform 0.2s;
+}
+
+.register-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(90deg, #ff8800, #ff5f00);
+}
+
+/* 区切り線 */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.divider hr {
+    flex: 1;
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+.divider span {
+    margin: 0 10px;
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* ---------------------------- */
+/* Googleログインボタンを洗練 */
+/* ---------------------------- */
+.social-buttons {
+    padding: 0 20px 20px;
+    box-sizing: border-box;
+}
+
+.gsi-material-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    font-size: 14px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.gsi-material-button:hover {
+    transform: translateY(-1px);
+}
+
+.gsi-material-button-icon {
+    height: 20px;
+    width: 20px;
+}
+
+.gsi-material-button-content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+
+.gsi-material-button-contents {
+    font-weight: 500;
+}
+
+/* ---------------------------- */
+/* スマホ対応 */
+/* ---------------------------- */
+@media screen and (max-width: 768px) {
+    .container {
+        border-radius: 0;
+        margin-top: 0;
+    }
+}
+
+
+
+/* ヘッダーのスタイル（左右対称で自然な波） */
+.wave-header {
+    position: relative;
+    height: 180px;
+    background: linear-gradient(135deg, #ffb774, #ff934f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    border-bottom-left-radius: 50% 10%;
+    border-bottom-right-radius: 50% 10%;
+}
+
+.wave-header h1 {
+    margin-top: 30px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    z-index: 2;
+    letter-spacing: 1px;
+}
+
+/* 波をSVGで描くため背景画像風に再設計 */
+.wave-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: url("data:image/svg+xml;utf8,    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'>    <path fill='%23fffaf6' fill-opacity='1' d='M0,192L80,170.7C160,149,320,107,480,101.3C640,96,800,128,960,154.7C1120,181,1280,203,1360,213.3L1440,224V320H1360C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320H0Z'></path>    </svg>") no-repeat bottom;
+    background-size: cover;
+    z-index: 1;
+}
+
+
+
+/* ヘッダーの波背景を自然に、白の下部背景を完全に上書き */
+.wave-header {
+    position: relative;
+    height: 180px;
+    background: linear-gradient(135deg, #ffb774, #ff934f);
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 40px;
+    flex-direction: column;
+    overflow: hidden;
+    border-bottom-left-radius: 50% 10%;
+    border-bottom-right-radius: 50% 10%;
+}
+
+/* 見やすく中央に配置された企業名 */
+.wave-header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    z-index: 2;
+    text-align: center;
+    margin: 0;
+    padding: 0 20px;
+    line-height: 1.2;
+}
+
+/* 波のSVG部分を完全に白のみに修正 */
+.wave-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: url("data:image/svg+xml;utf8,    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'>    <path fill='%23ffffff' fill-opacity='1' d='M0,224L80,213.3C160,203,320,181,480,154.7C640,128,800,96,960,101.3C1120,107,1280,149,1360,170.7L1440,192V320H1360C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320H0Z'></path>    </svg>") no-repeat bottom;
+    background-size: cover;
+    z-index: 1;
+}
+
+
+
+.wave-header {
+    position: relative;
+    height: 180px;
+    background: linear-gradient(135deg, #ffb774, #ff934f);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 40px;
+    flex-direction: column;
+    overflow: hidden;
+    border-bottom-left-radius: 50% 10%;
+    border-bottom-right-radius: 50% 10%;
+}
+
+/* 企業名テキストを波より前面に固定 */
+.wave-header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0 20px;
+    line-height: 1.2;
+    position: relative;
+    z-index: 10; /* ← これで波より前に表示 */
+}
+
+/* 波の背景（後方に送る） */
+.wave-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 1;
+    background: url("data:image/svg+xml;utf8,    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'>    <path fill='%23ffffff' fill-opacity='1' d='M0,224L80,213.3C160,203,320,181,480,154.7C640,128,800,96,960,101.3C1120,107,1280,149,1360,170.7L1440,192V320H1360C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320H0Z'></path>    </svg>") no-repeat bottom;
+    background-size: cover;
+}
+
+
+
+/* ヘッダー全体 */
+.wave-header {
+    position: relative;
+    height: 180px;
+    background: linear-gradient(135deg, #ffb774, #ff934f);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 0;
+}
+
+/* 企業名ロゴの中央配置 + 前面表示 */
+.wave-header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    line-height: 1;
+}
+
+/* 波SVG背景を完全な白色、線が出ないように修正 */
+.wave-header::after {
+    content: "";
+    position: absolute;
+    bottom: -1px; /* わずかに下げてオレンジ線をカバー */
+    width: 100%;
+    height: 100px;
+    z-index: 1;
+    overflow: hidden;
+    background: url("data:image/svg+xml;utf8,    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'>    <path fill='%23ffffff' d='M0,192L60,202.7C120,213,240,235,360,229.3C480,224,600,192,720,186.7C840,181,960,203,1080,213.3C1200,224,1320,224,1380,224L1440,224V320H1380C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320H0Z'></path>    </svg>") no-repeat bottom;
+    background-size: cover;
+}
+
+
+
+/* プレースホルダーを薄く見せる */
+input::placeholder {
+    color: rgba(0, 0, 0, 0.35); /* 控えめな薄グレー */
+    font-style: italic;
+}
+
+/* 新しいヘッダーカーブデザイン */
+.curved {
+    position: relative;
+    background: linear-gradient(135deg, #ffb774, #ff934f);
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.curved::after {
+    content: '';
+    border-top-left-radius: 50% 100%;
+    border-top-right-radius: 50% 100%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    height: 30%;
+    z-index: 1;
+}
+
+.curved h1 {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    z-index: 2;
+    position: relative;
+}
+
+
+
+/* ---------------------------- */
+/* 全体洗練：フォントと色合い */
+/* ---------------------------- */
+body {
+    font-family: 'Helvetica Neue', 'Segoe UI', sans-serif;
+    background: #fffaf6;
+    color: #333;
+}
+
+/* コンテナボックス */
+.container {
+    width: 100%;
+    max-width: 420px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin: 20px auto;
+}
+
+/* ---------------------------- */
+/* 見出しヘッダー（カーブ版） */
+/* ---------------------------- */
+.curved {
+    position: relative;
+    background: linear-gradient(135deg, #ffb774, #ff934f);
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.curved::after {
+    content: '';
+    border-top-left-radius: 50% 100%;
+    border-top-right-radius: 50% 100%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    height: 30%;
+    z-index: 1;
+}
+
+.curved h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    z-index: 2;
+    position: relative;
+    letter-spacing: 1px;
+}
+
+/* ---------------------------- */
+/* 入力フォームとフィールド */
+/* ---------------------------- */
+.form {
+    padding: 24px;
+}
+
+.form label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    color: #ff7a00;
+    font-size: 15px;
+}
+
+.form input {
+    width: 100%;
+    padding: 13px 16px;
+    font-size: 15px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+    border-color: #ffa94d;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.1);
+}
+
+/* プレースホルダー */
+input::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+    font-style: italic;
+}
+
+/* ---------------------------- */
+/* 登録ボタン */
+/* ---------------------------- */
+.register-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    background: linear-gradient(to right, #ff9a00, #ff6a00);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(255, 120, 0, 0.25);
+    transition: all 0.25s ease-in-out;
+}
+
+.register-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255, 100, 0, 0.35);
+}
+
+/* ---------------------------- */
+/* Googleログインボタン統一化 */
+/* ---------------------------- */
+.social-buttons {
+    padding: 0 24px 24px;
+}
+
+.gsi-material-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+    background-color: #f2f2f2;
+    border-radius: 12px;
+    font-size: 14px;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+}
+
+.gsi-material-button:hover {
+    background-color: #e6e6e6;
+    transform: translateY(-1px);
+}
+
+/* Google icon sizing fix */
+.gsi-material-button-icon {
+    height: 20px;
+    width: 20px;
+}

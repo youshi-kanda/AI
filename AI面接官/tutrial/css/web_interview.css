@@ -90,16 +90,33 @@ svg {
     background-color: #FF6A00;
 }
 
-.menu{
+.menu {
     display: flex;
-    justify-content: center;
-    margin-right: 10px;
+    justify-content: center; /* 中央揃え */
+    align-items: center; /* 垂直方向の中央揃え */
+    gap: 10px; /* ボタン間の隙間 */
+    padding: 10px;
 }
 
-.camera_container{
-    margin-right: 10px;
+.menu button {
+    font-size: 24px; /* アイコンのサイズを調整 */
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.mute{
-    margin-right: 10px;
+.menu button:hover {
+    background-color: #0056b3;
+}
+
+.menu i {
+    font-size: 24px; /* アイコンのサイズを指定 */
+    width: 24px; /* アイコンの幅を指定 */
+    height: 24px; /* アイコンの高さを指定 */
+    display: inline-block; /* サイズを適用するためにブロック要素に */
+    text-align: center; /* アイコンを中央揃え */
+    line-height: 24px; /* アイコンを中央に配置 */
 }

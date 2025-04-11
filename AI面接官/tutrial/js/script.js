@@ -6,3 +6,12 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("register-form");
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault(); // フォームの送信をキャンセル
+        window.location.href = "tutorial.html"; // tutorial.html に遷移
+    });
+});

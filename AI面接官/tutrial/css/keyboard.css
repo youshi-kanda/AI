@@ -15,3 +15,24 @@ body {
     margin: 1rem auto; /* Top/bottom margin remains, auto centers horizontally */
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
   }
+
+  .button-container {
+    text-align: right;  /* ボタンを右寄せにする */
+    padding: 10px;
+}
+
+#next_button {
+    padding: 5px 10px;
+    border: 2px solid #FF8400;
+    background-color: #FF8400;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 25px;
+    margin-right: 0;
+    margin-top: -50px; 
+}
+
+#next_button:hover {
+    background-color: #FF6A00;
+}

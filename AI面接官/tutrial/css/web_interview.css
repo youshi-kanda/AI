@@ -18,7 +18,7 @@ svg {
 .top-svg {
     display: block;
     width: 100%;
-    height: auto;
+    height: 50;
     margin-bottom: 50px; 
 }
 
@@ -32,11 +32,13 @@ svg {
 }
 
 .AI_interviewer {
+    margin-top: 30px; /* ← ここを追加 */
     display: flex;
     justify-content: center; /* 中央揃え */
     align-items: center; /* 中央に配置 */
-    width: 300px; /* 枠の幅を指定 */
-    height: 200px; /* 枠の高さを指定 */
+    width: 90%;               /* ← スマホ対応！画面幅の90%までにする */
+    max-width: 700px;       
+    height: 300px;  /* 枠の高さを指定 */
     border: 3px solid #000; /* 枠線を追加 */
     border-radius: 8px; /* 角を丸くする場合 */
     overflow: hidden; /* 枠からはみ出さないようにする */
@@ -54,8 +56,10 @@ svg {
     display: flex;
     justify-content: center; /* 中央揃え */
     align-items: center; /* 中央に配置 */
-    width: 300px; /* 枠の幅を指定 */
+    width: 90%;               /* ← スマホ対応！画面幅の90%までにする */
+    max-width: 700px;       
     height: 200px; /* 枠の高さを指定 */
+    height: 300px; 
     border: 3px solid #000; /* 枠線を追加 */
     border-radius: 8px; /* 角を丸くする場合 */
     overflow: hidden; /* 枠からはみ出さないようにする */
@@ -120,3 +124,12 @@ svg {
     text-align: center; /* アイコンを中央揃え */
     line-height: 24px; /* アイコンを中央に配置 */
 }
+
+.interview2 {
+    display: flex;
+    flex-direction: column;      /* ← これで縦に並ぶように */
+    justify-content: center;     /* 縦方向の中央揃え（columnにしたので縦） */
+    align-items: center;         /* 横方向の中央揃え */
+    height: 100vh;               /* 画面全体の高さを確保 */
+  }
+  

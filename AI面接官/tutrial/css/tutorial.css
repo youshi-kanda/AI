@@ -1,59 +1,49 @@
-body, html {
+body {
     margin: 0;
     padding: 0;
-    height: 100%;
-    position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center; /* 中央揃え */
-}
-
-/* スマホ用のスタイル */
-@media (max-width: 768px) {
-    .AI_interviewer, .applicant {
-        width: 80%; /* スマホ用の幅 */
-        height: auto; /* 高さを自動調整 */
-    }
-}
-
-/* PC用のスタイル */
-@media (min-width: 769px) {
-    .AI_interviewer, .applicant {
-        width: 300px; /* PC用の幅 */
-        height: 200px; /* PC用の高さ */
-    }
-}
-
-svg {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-
-.top-svg {
-    margin-bottom: 50px;
-}
-
-.bottom-svg {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-}
-
-.AI_interviewer, .applicant {
+    align-items: center;
+    background-color: #f4f4f4;
+    font-family: sans-serif;
+  }
+  
+  /* 面接官画像の枠 */
+  .AI_interviewer {
+    width: 100%;              /* 横幅いっぱい */
+    max-width: 100%;          /* はみ出さない */
     display: flex;
     justify-content: center;
-    align-items: center;
-    border: 3px solid #000;
-    border-radius: 8px;
-    overflow: hidden;
-    margin: 0 auto;
-    margin-bottom: 10px;
-}
-
-.AI_interviewer img, .applicant img {
-    width: 100%;
+    padding: 2rem 0;          /* 上下に余白をつける */
+    background-color: rgba(255, 132, 0, 0.1); /* 背景色と透明度 */
+  }
+  
+  /* 画像サイズは変更しない */
+  .AI_interviewer img {
+    width: auto;
     height: auto;
-    object-fit: cover;
-}
+    max-height: 300px;       /* 縦の最大サイズを指定 */
+  }
+  
+  /* テキストエリア中央寄せ */
+  #text_area {
+    text-align: center;
+    margin: 1rem 0;
+  }
+  
+  /* ボタン中央寄せ */
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  
+  #next_button {
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    background-color: #FF8400;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }

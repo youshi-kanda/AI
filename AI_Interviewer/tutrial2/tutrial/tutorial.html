@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <path fill="#FF8400" fill-opacity="0.4" d="..." />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チュートリアル画面</title>
+    <link rel="stylesheet" href="css/tutorial.css">
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+
+    <!--背景-->
+    <div class="back_Ground">
+
+        <div class="wave-container">
+            <svg viewBox="0 80 1000 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="90">
+                <path transform="rotate(180, 500, 100)"
+                    d="M0,80 C200,180 400,0 600,80 C800,160 1000,0 1000,80 L1000,200 L0,200 Z" fill="#FF8400"
+                    fill-opacity="0.4" />
+            </svg>
+        </div>
+
+        <!--進捗indicator-->
+        <div class="progress-container">
+            <div class="bar active"></div>
+            <div class="bar active"></div>
+            <div class="bar active"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+        <!--イメージ画像-->
+        <div class="AI_interviewer">
+            <img src="images/22745641.jpg" alt="面接官の画像" />
+        </div>
+
+        <!--テキストエリア-->
+        <div id="text_area">
+            <h5>AI面接官:初めまして、AI面接官です。</h4>
+        </div>
+
+        <!--画面遷移ボタン-->
+        <div class="button-container">
+            <button id="next_button">次へ</button>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

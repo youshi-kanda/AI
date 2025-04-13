@@ -1,0 +1,73 @@
+/* ベーススタイル（共通） */
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+.top-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+h3 {
+  margin-top: 2rem;
+  font-size: 1.6rem;
+  color: #333;
+}
+
+input {
+  width: 90%;
+  max-width: 500px;
+  padding: 1rem;
+  font-size: 1.1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 1.5rem auto;
+  display: block;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+#next_button {
+  padding: 10px 24px;
+  border: none;
+  background-color: #FF8400;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 25px;
+  transition: background-color 0.3s ease;
+}
+
+#next_button:hover {
+  background-color: #FF6A00;
+}
+
+/* レスポンシブ対応：スマホ画面 */
+@media screen and (max-width: 600px) {
+  h3 {
+    font-size: 1.3rem;
+    margin-top: 1.2rem;
+  }
+
+  input {
+    font-size: 1rem;
+    padding: 0.9rem;
+    margin: 1rem auto;
+  }
+
+  #next_button {
+    font-size: 0.95rem;
+    padding: 8px 20px;
+  }
+}

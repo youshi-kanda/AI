@@ -1,0 +1,81 @@
+body {
+  background-color: rgba(255, 132, 0, 0.1);
+}
+
+.back_Ground {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.wave-container {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0; /* 余白防止 */
+}
+
+.wave-container svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.progress-container {
+  display: flex;
+  gap: 4px;
+  /* 各バーの隙間 */
+  width: 100%;
+  max-width: 600px;
+}
+
+.bar {
+  flex: 1;
+  height: 4px;
+  /* 細長いバーの太さ */
+  background-color: #cfc7c7;
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
+}
+
+.bar.active {
+  background-color: #101011;
+}
+
+.AI_interviewer {
+  margin-top: 40px;
+  width: 600px;
+  border: 1px solid black;
+}
+
+/* 画像サイズは変更しない */
+.AI_interviewer img {
+  width: auto;
+  height: auto;
+}
+
+.button-container{
+  margin-left: 530px;
+}
+
+/* テキストエリア中央寄せ */
+#text_area {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 600px;
+  height: 120px;
+  background-color: white;
+  border-radius: 20px;
+  border: 1px solid black;
+}
+
+#next_button {
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  background-color: #FF8400;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}

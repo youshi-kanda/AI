@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>面接チュートリアル</title>
+  <link rel="stylesheet" href="css/tutorial.css" />
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <div class="curved">
+    <h1>面接チュートリアル</h1>
+  </div>
+
+  <!-- 面接官画像 -->
+  <div class="avatar-fixed" id="avatar">
+    <img src="images/interviewer.png" alt="面接官" />
+  </div>
+
+  <!-- メイン -->
+  <div class="container">
+
+    <!-- ステップバー -->
+    <div class="step-indicator">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <!-- セリフ表示 -->
+    <div class="dialog-box" id="dialog"></div>
+
+    <!-- 「次へ」ボタン -->
+    <div class="next-button">
+      <button id="nextBtn">&rarr;</button>
+    </div>
+
+    <!-- 面接スタイル選択ボタン -->
+    <div class="choice-buttons" id="choiceArea" style="display: none;">
+      <button onclick="location.href='interview_chat.html'">チャット＋音声で面接</button>
+      <button onclick="location.href='interview_video.html'">ビデオ面接で進む</button>
+    </div>
+
+  </div>
+
+  <script src="js/tutorial.js"></script>
+</body>
+</html>

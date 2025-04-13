@@ -1,0 +1,159 @@
+/* ヘッダー */
+.curved {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(135deg, #ffb774, #ff934f);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.curved::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30%;
+    background: #fff;
+    border-top-left-radius: 50% 100%;
+    border-top-right-radius: 50% 100%;
+    z-index: 1;
+}
+
+.curved h1 {
+    font-size: 20px;
+    color: #fff;
+    z-index: 2;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* 面接官画像 */
+.avatar-fixed {
+    position: fixed;
+    top: 160px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 500;
+}
+.avatar-fixed img {
+    width: 400px;
+    height: auto;
+    border-radius: 12px;
+    transition: transform 0.2s ease;
+}
+.avatar-fixed.talking img {
+    animation: bobbing 0.3s infinite ease-in-out;
+}
+@keyframes bobbing {
+    0%   { transform: scale(1); }
+    50%  { transform: scaleY(0.95); }
+    100% { transform: scale(1); }
+}
+
+/* コンテンツ */
+.container {
+    max-width: 640px;
+    margin: 420px auto 40px;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+
+/* ステップバー */
+.step-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.step-indicator span {
+    width: 40px;
+    height: 6px;
+    background-color: #eee;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+.step-indicator span.active {
+    background-color: #ff9a00;
+}
+
+/* セリフ */
+.dialog-box {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-size: 18px;
+    line-height: 1.8;
+    min-height: 80px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: left;
+    word-break: break-word;
+}
+.dialog-box p {
+    margin: 0 0 12px;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+/* 「次へ」ボタン */
+.next-button {
+    text-align: right;
+}
+.next-button button {
+    background: linear-gradient(to right, #ff9a00, #ff6a00);
+    border: none;
+    color: white;
+    font-size: 22px;
+    padding: 10px 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255, 120, 0, 0.3);
+    transition: opacity 0.3s;
+}
+
+/* 面接スタイル選択ボタン */
+.choice-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+    align-items: center;
+}
+.choice-buttons button {
+    width: 90%;
+    max-width: 320px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(to right, #ff9800, #ff7300);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(255, 115, 0, 0.3);
+    transition: transform 0.2s;
+}
+.choice-buttons button:hover {
+    transform: translateY(-2px);
+}
+
+/* スマホ対応 */
+@media screen and (max-width: 768px) {
+    .avatar-fixed img {
+        width: 180px;
+    }
+    .container {
+        margin-top: 320px;
+    }
+    .dialog-box {
+        font-size: 16px;
+    }
+    .curved h1 {
+        font-size: 18px;
+    }
+}

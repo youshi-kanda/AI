@@ -1,0 +1,176 @@
+/* ------------------------ */
+/* ヘッダー（共通） */
+/* ------------------------ */
+.curved {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(135deg, #ffb774, #ff934f);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.curved::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30%;
+    background: #fff;
+    border-top-left-radius: 50% 100%;
+    border-top-right-radius: 50% 100%;
+    z-index: 1;
+}
+.curved h1 {
+    font-size: 20px;
+    color: #fff;
+    z-index: 2;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* ------------------------ */
+/* チャット領域 */
+/* ------------------------ */
+.chat-container {
+    margin-top: 160px;
+    margin-bottom: 120px;
+    padding: 16px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    overflow-y: auto;
+    height: calc(100vh - 280px);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* 吹き出し共通 */
+.chat-bubble {
+    padding: 12px 16px;
+    border-radius: 16px;
+    max-width: 75%;
+    font-size: 15px;
+    line-height: 1.5;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    display: flex;
+    gap: 10px;
+}
+
+/* 面接官（左寄せ） */
+.bot {
+    background: #ffe2c5;
+    align-self: flex-start;
+    border-top-left-radius: 0;
+    text-align: left;
+}
+
+/* 面接官アイコンを丸く表示 */
+.bot .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.bot .icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 面接者（右寄せ） */
+.user {
+    background: #d9f1ff;
+    align-self: flex-end;
+    border-top-right-radius: 0;
+    justify-content: flex-end;
+    text-align: right;
+}
+
+/* ------------------------ */
+/* 入力エリア */
+/* ------------------------ */
+.chat-input-area {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #eee;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    z-index: 999;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.chat-input-area input {
+    flex: 1;
+    max-width: 400px;
+    padding: 10px 14px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.chat-input-area button {
+    padding: 10px 14px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(to right, #ff9a00, #ff6a00);
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* 音声ボタン */
+.chat-input-area .mic-button {
+    background: #fff;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    padding: 10px;
+}
+
+/* ------------------------ */
+/* フッターの波 */
+/* ------------------------ */
+.footer-curve {
+    position: fixed;
+    bottom: 60px;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: #fff;
+    border-bottom-left-radius: 50% 100%;
+    border-bottom-right-radius: 50% 100%;
+    z-index: 1;
+}
+
+/* ------------------------ */
+/* レスポンシブ */
+/* ------------------------ */
+@media screen and (max-width: 768px) {
+    .chat-input-area {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .chat-input-area input,
+    .chat-input-area button {
+        width: 100%;
+    }
+
+    .chat-container {
+        padding-bottom: 100px;
+    }
+}

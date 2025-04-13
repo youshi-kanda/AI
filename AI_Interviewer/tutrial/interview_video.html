@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI面接官 - ビデオセッション</title>
+  <link rel="stylesheet" href="css/interview_video.css" />
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <div class="curved">
+    <h1>AI面接官 - ビデオセッション</h1>
+  </div>
+
+  <!-- 映像エリア（上：面接官 / 下：面接者） -->
+  <div class="video-area">
+    <div class="video-box">
+      <img src="images/interviewer.png" alt="面接官" />
+    </div>
+    <div class="video-box">
+      <video id="userVideo" autoplay muted playsinline></video>
+    </div>
+  </div>
+
+  <!-- チャットログ -->
+  <div class="chat-log" id="chatLog"></div>
+
+  <!-- チャット入力エリア -->
+  <div class="chat-input">
+    <button class="mic-btn" id="micBtn">🎤</button>
+    <input type="text" id="userInput" placeholder="ここに入力..." />
+    <button id="sendBtn">送信</button>
+  </div>
+
+  <!-- コントロールボタン（画像アイコン） -->
+  <div class="control-buttons">
+    <button id="videoBtn" title="ビデオ切替">
+      <img src="icons/video.svg" alt="ビデオ" />
+    </button>
+    <button id="micToggleBtn" title="マイク切替">
+      <img src="icons/mic.svg" alt="マイク" />
+    </button>
+    <button title="設定">
+      <img src="icons/settings.svg" alt="設定" />
+    </button>
+    <button title="退出">
+      <img src="icons/exit.svg" alt="退出" />
+    </button>
+    <button id="recordBtn" title="録画開始">
+      <img src="icons/record.svg" alt="録画" />
+    </button>
+  </div>
+
+  <!-- フッター波 -->
+  <div class="footer-curve"></div>
+
+  <!-- JavaScript -->
+  <script src="js/interview_video.js"></script>
+</body>
+</html>

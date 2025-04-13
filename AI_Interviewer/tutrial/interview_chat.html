@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>面接チャット</title>
+  <link rel="stylesheet" href="css/interview_chat.css" />
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <div class="curved">
+    <h1>面接チャット</h1>
+  </div>
+
+  <!-- チャット表示領域 -->
+  <div class="chat-container" id="chatContainer">
+    <!-- 自動でメッセージがJSから追加される -->
+  </div>
+
+  <!-- 入力エリア -->
+  <div class="chat-input-area">
+    <button class="mic-button" id="micBtn" title="音声入力">
+      🎤
+    </button>
+    <input type="text" id="userInput" placeholder="ここに入力..." />
+    <button id="sendBtn">送信</button>
+  </div>
+
+  <!-- フッターのカーブ -->
+  <div class="footer-curve"></div>
+
+  <script src="js/interview_chat.js"></script>
+</body>
+</html>

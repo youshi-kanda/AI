@@ -4,13 +4,13 @@ const micBtn = document.getElementById("micBtn");
 const input = document.getElementById("userInput");
 const userVideo = document.getElementById("userVideo");
 const recordBtn = document.getElementById("recordBtn");
+const recordIcon = recordBtn.querySelector("i");
 
 let currentQuestion = 0;
 let mediaStream = null;
 let mediaRecorder = null;
 let recordedChunks = [];
 
-// 面接官の質問
 const questions = [
   "本日はよろしくお願いします。それでは面接を始めていきます。",
   "まずは自己紹介をお願いします。",
@@ -19,12 +19,10 @@ const questions = [
   "最後に何か質問はありますか？"
 ];
 
-// 初期表示（カメラ・マイクは起動しない）
 window.onload = () => {
   speakAndDisplayBot(questions[currentQuestion]);
 };
 
-// 音声読み上げとチャット表示
 function speakAndDisplayBot(text) {
   const bubble = document.createElement("div");
   bubble.className = "bot";
@@ -37,7 +35,6 @@ function speakAndDisplayBot(text) {
   speechSynthesis.speak(utter);
 }
 
-// 面接者の回答を送信
 sendBtn.addEventListener("click", () => {
   const text = input.value.trim();
   if (!text) return;
@@ -55,7 +52,6 @@ sendBtn.addEventListener("click", () => {
   }
 });
 
-// 音声入力（マイクボタン）
 micBtn.addEventListener("click", () => {
   if (!("webkitSpeechRecognition" in window)) {
     alert("音声認識はこのブラウザではサポートされていません。");
@@ -76,6 +72,17 @@ micBtn.addEventListener("click", () => {
     input.value = transcript;
     micBtn.disabled = false;
     micBtn.textContent = "🎤";
+
+    const bubble = document.createElement("div");
+    bubble.className = "user";
+    bubble.textContent = transcript;
+    chatLog.appendChild(bubble);
+    chatLog.scrollTop = chatLog.scrollHeight;
+
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      setTimeout(() => speakAndDisplayBot(questions[currentQuestion]), 1000);
+    }
   };
 
   recognition.onerror = () => {
@@ -85,7 +92,6 @@ micBtn.addEventListener("click", () => {
   };
 });
 
-// カメラ・マイクを起動（明示操作時のみ）
 async function requestCameraAndMic() {
   try {
     mediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
@@ -96,17 +102,15 @@ async function requestCameraAndMic() {
   }
 }
 
-// 🎥 ボタン：カメラ起動または切り替え
 document.getElementById("videoBtn").addEventListener("click", () => {
   if (!mediaStream) {
-    requestCameraAndMic(); // 初回：許可を求める
+    requestCameraAndMic();
   } else {
     const videoTrack = mediaStream.getVideoTracks()[0];
     videoTrack.enabled = !videoTrack.enabled;
   }
 });
 
-// 🎙️ ボタン：マイクのON/OFF
 document.getElementById("micToggleBtn").addEventListener("click", () => {
   if (!mediaStream) {
     alert("マイクがまだ有効になっていません（🎥ボタンを先に押してください）");
@@ -116,7 +120,6 @@ document.getElementById("micToggleBtn").addEventListener("click", () => {
   audioTrack.enabled = !audioTrack.enabled;
 });
 
-// ⏺ ボタン：録画の開始／停止
 recordBtn.addEventListener("click", () => {
   if (!mediaStream) {
     alert("まず 🎥 ボタンでカメラ・マイクを起動してください。");
@@ -130,7 +133,6 @@ recordBtn.addEventListener("click", () => {
   }
 });
 
-// 録画スタート
 function startRecording() {
   recordedChunks = [];
   mediaRecorder = new MediaRecorder(mediaStream);
@@ -150,13 +152,14 @@ function startRecording() {
   };
 
   mediaRecorder.start();
-  document.querySelector("#recordBtn img").src = "icons/stop.svg";
+  recordIcon.setAttribute("data-lucide", "stop-circle");
+  lucide.createIcons();
   recordBtn.title = "録画停止";
 }
 
-// 録画ストップ
 function stopRecording() {
   mediaRecorder.stop();
-  document.querySelector("#recordBtn img").src = "icons/record.svg";
+  recordIcon.setAttribute("data-lucide", "circle");
+  lucide.createIcons();
   recordBtn.title = "録画開始";
 }

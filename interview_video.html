@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI面接官 - ビデオセッション</title>
   <link rel="stylesheet" href="css/interview_video.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
@@ -13,7 +14,7 @@
     <h1>AI面接官 - ビデオセッション</h1>
   </div>
 
-  <!-- 映像エリア（上：面接官 / 下：面接者） -->
+  <!-- 映像エリア -->
   <div class="video-area">
     <div class="video-box">
       <img src="images/interviewer.png" alt="面接官" />
@@ -26,29 +27,29 @@
   <!-- チャットログ -->
   <div class="chat-log" id="chatLog"></div>
 
-  <!-- チャット入力エリア -->
+  <!-- 入力エリア -->
   <div class="chat-input">
     <button class="mic-btn" id="micBtn">🎤</button>
     <input type="text" id="userInput" placeholder="ここに入力..." />
     <button id="sendBtn">送信</button>
   </div>
 
-  <!-- コントロールボタン（画像アイコン） -->
+  <!-- コントロールボタン（Lucide Icons） -->
   <div class="control-buttons">
-    <button id="videoBtn" title="ビデオ切替">
-      <img src="icons/video.svg" alt="ビデオ" />
+    <button id="videoBtn" title="ビデオ切替" class="icon-btn">
+      <i data-lucide="video"></i>
     </button>
-    <button id="micToggleBtn" title="マイク切替">
-      <img src="icons/mic.svg" alt="マイク" />
+    <button id="micToggleBtn" title="マイク切替" class="icon-btn">
+      <i data-lucide="mic"></i>
     </button>
-    <button title="設定">
-      <img src="icons/settings.svg" alt="設定" />
+    <button title="設定" class="icon-btn">
+      <i data-lucide="settings"></i>
     </button>
-    <button title="退出">
-      <img src="icons/exit.svg" alt="退出" />
+    <button title="退出" class="icon-btn">
+      <i data-lucide="log-out"></i>
     </button>
-    <button id="recordBtn" title="録画開始">
-      <img src="icons/record.svg" alt="録画" />
+    <button id="recordBtn" title="録画開始" class="icon-btn">
+      <i data-lucide="circle"></i>
     </button>
   </div>
 
@@ -57,5 +58,8 @@
 
   <!-- JavaScript -->
   <script src="js/interview_video.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
 </body>
 </html>

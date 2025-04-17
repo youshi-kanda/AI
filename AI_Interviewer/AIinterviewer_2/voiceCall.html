@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音声通話フレーム</title>
+    <link rel="stylesheet" href="css/voiceCall.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+            <div class="header-left">
+                <div class="record-icon">
+                    <i class="bi bi-record-circle"></i>
+                </div>
+                <div class="camera-switch-icon">
+                    <i class="bi bi-camera-reels"></i>
+                </div>
+            </div>
+            <div class="header-center">
+                <span class="header-title">AI面接官</span>
+            </div>
+            <div class="header-right">
+                
+            </div>
+        </header>
+
+        <div class="interviewer">
+            <div class="candidate"></div>
+        </div>
+
+        <div class="text-container">
+            <div class="text-box"></div>
+        </div>
+
+        <footer>
+            <div class="footer-container">
+                <div class="icon-container" id="camera-icon-container">
+                    <i class="bi bi-camera-video" id="camera-icon"></i>
+                </div>
+                <div class="icon-container" id="mic-icon-container">
+                    <i class="bi bi-mic" id="mic-icon"></i>
+                </div>
+                <div class="icon-container">
+                    <i class="bi bi-telephone-x-fill"></i>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <script src="js/voiceCall.js"></script> 
+    
+</body>
+
+</html>

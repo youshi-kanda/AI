@@ -1,0 +1,251 @@
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: black;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  
+  height: 100vh;
+  margin: 0 auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background-color: black;
+}
+
+header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #CB6847;
+  width: 100%;
+  height: 60px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+header>div {
+  /* header直下のdivに適用 */
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.header-left {
+  width: 20%;
+  justify-content: flex-start;
+}
+
+.header-center {
+  width: 60%;
+  justify-content: center;
+}
+
+.header-right {
+  width: 20%;
+  justify-content: flex-end;
+}
+
+.end-call-icon,
+.record-icon,
+.camera-switch-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: white;
+  color: black;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.end-call-icon {
+  color: red;
+}
+
+.header-title {
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+}
+
+.gear-icon {
+  display: inline-block;
+  font-size: 24px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 10px;
+  margin-left: 20px;
+  color: black;
+}
+
+.header {
+  color: #aaa;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.circle {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #a8c4f9;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.circle.active {
+  background-color: #a8dcf0;
+}
+
+.icon-square {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 24px;
+}
+
+.interviewer {
+  position: relative;
+  width: 80%;
+  height: 60%;
+  overflow: hidden;
+  background-image: url("../image/AI面接官女性イラスト.jpeg");
+  background-size: cover;
+  background-position: center 20%;
+  background-repeat: no-repeat;
+  margin-top: 20px;
+}
+
+.dialog-box {
+  position: relative;
+  margin-top: 40px;
+  margin-right: 100px;
+  width: 200px;
+  height: 200px;
+  border: 1px solid white;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.candidate {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 150px;
+  height: 150px;
+  border: 2px solid white;
+  background-color: black;
+  border-radius: 5px;
+  background-image: url("../image/candidate.jpeg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.mic-icon {
+  position: relative;
+  margin-left: 470px;
+  margin-bottom: 380px;
+  border: 1px solid white;
+  padding: 10px;
+  display: inline-block;
+  border-radius: 4px;
+  font-size: 46px;
+}
+
+.video-icon {
+  position: relative;
+  margin-left: 470px;
+  margin-bottom: 220px;
+  border: 1px solid white;
+  padding: 10px;
+  display: inline-block;
+  border-radius: 4px;
+  font-size: 46px;
+}
+
+.text-container {
+  width: 100%;
+  height: auto;
+  background-color: #333;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  flex-grow: 1;
+}
+
+.text-box {
+  width: 95%;
+  height: 80%;
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 5px;
+  text-align: center;
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+footer {
+  width: 100%;
+  height: auto;
+  background-color: #CB6847;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  margin-top: auto;
+}
+
+.footer-container {
+  width: 80%;
+  height: 70px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 24px;
+  color: white;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border: 1px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.icon-container i {
+  margin: 0;
+}

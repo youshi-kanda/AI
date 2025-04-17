@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>チュートリアルフレーム</title>
+  <link rel="stylesheet" href="css/introduction.css" />
+</head>
+<body>
+  <div class="back_ground">
+    <header>
+      <div id="backButton" class="back-button">&lt;</div>
+      <div class="title">AI面接官</div>
+      <div class="kebab-menu">
+        <span></span><span></span><span></span>
+      </div>
+    </header>
+
+    <div class="main-layout">
+      <!-- 左カラム -->
+      <div class="left-column">
+        <div class="progress-container">
+          <div class="bar active"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+
+        <div class="image-box"></div>
+
+        <div class="text-area">
+          <p id="intro-message">AI面接官: はじめまして、こんにちは<br>あなたのことをお聞かせください</p>
+        </div>
+
+        <button class="next-button">&gt;</button>
+
+        <div id="choiceArea" style="display: none;">
+          <button class="choice-button" id="voiceCallButton">音声通話</button>
+          <button class="choice-button" id="chatCallButton">チャット通話</button>
+        </div>
+      </div>
+
+      <!-- 右カラム：マイク・カメラ -->
+      <div class="right-column" id="device-check" style="display: none;">
+        <video id="videoPreview" autoplay muted></video>
+
+        <p id="video-status">カメラ状態: 未確認</p>
+        <button id="toggleVideoButton">カメラのオン/オフ切替</button>
+
+        <p id="mic-status">マイク状態: 未確認</p>
+        <button id="toggleMicButton">マイクのオン/オフ切替</button>
+
+        <div id="mic-level-container">
+          <div id="mic-level"></div>
+        </div>
+
+        <button id="deviceCheckButton">マイクとカメラを確認する</button>
+      </div>
+    </div>
+
+    <script src="js/introduction.js"></script>
+  </div>
+</body>
+</html>

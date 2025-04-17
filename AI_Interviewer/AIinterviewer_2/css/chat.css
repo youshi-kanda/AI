@@ -1,0 +1,229 @@
+input,
+textarea {
+  font-size: 18px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: black;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0 auto;
+
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #332E29;
+}
+
+/* ヘッダー */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #CB6847;
+  color: #333;
+  padding: 10px;
+  height: 60px; /* ヘッダーの高さを固定 */
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  width: 70%;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  width: 30%;
+  justify-content: flex-end;
+}
+
+.back-button {
+  font-size: 30px;
+  color: #555;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #ddd;
+  margin-right: 8px;
+}
+
+.message-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.kebab-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 16px;
+  width: 10px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.kebab-menu span {
+  display: block;
+  width: 4px;
+  height: 4px;
+  background-color: #555;
+  border-radius: 50%;
+}
+
+/* チャットエリア */
+.chat-area {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: #332E29;
+}
+
+/* メッセージスタイル */
+.message {
+  max-width: 80%;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.received {
+  background-color: #fff;
+  align-self: flex-start;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.sent {
+  background-color: #e0f2f1;
+  align-self: flex-end;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* 入力エリア */
+.input-area {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+  margin-right: 8px;
+  outline: none;
+}
+
+.input-area button {
+  background-color: #CB6847;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+/* プラスボタン */
+.plus-button {
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.plus-button i {
+  font-size: 20px;
+}
+
+/* 添付ファイルアイコン */
+.attachment-wrapper {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.attachment-icon {
+  font-size: 24px;
+  color: #888;
+}
+
+.file-input {
+  display: none;
+}
+
+/* 送信ボタン */
+.send-button {
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.send-button i {
+  font-size: 20px;
+}
+
+.my-message {
+  background-color: rgb(252, 192, 137); 
+}
+
+.voiceBtn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.voiceBtn i {
+  font-size: 20px;
+  color: white; /* お好みで色指定 */
+}
+
+textarea#userInput {
+  resize: none;
+  overflow: hidden;
+  line-height: 1.5;
+  height: 40px; /* 必要に応じて調整 */
+}
+

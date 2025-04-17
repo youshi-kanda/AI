@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チャットフレーム</title>
+    <link rel="stylesheet" href="css/chat.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"> 
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <div class="back-button">&lt;</div>
+                <div class="avatar"></div>
+                <div class="message-title">AI面接官</div>
+            </div>
+            <div class="header-right">
+                <div class="kebab-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </header>
+
+        <div class="chat-area">
+        </div>
+
+        <div class="input-area">
+            <label class="attachment-wrapper">
+                <span class="attachment-icon"><i class="bi bi-paperclip"></i></span>
+                <input type="file" class="file-input" id="fileInput" multiple>
+            </label>
+            <input type="text" id="userInput" placeholder="メッセージを入力">
+            <button class="voiceBtn" id="voiceBtn">
+                <i class="bi bi-mic-fill"></i>
+            </button>
+            <button class="send-button" id="sendButton">
+                <i class="bi bi-send"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="js/chat.js"></script>
+</body>
+
+</html>

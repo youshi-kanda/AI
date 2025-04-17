@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #1d1a16; /* ダークトーンに統一 */
+}
+
+.container {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    background: #332E29;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+}
+
+/* 修正済：タイトルの見栄え改善 */
+.title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    color: #fff;
+    margin: 40px 0 20px;
+    letter-spacing: 1.2px;
+    position: relative;
+}
+
+.title::after {
+    content: '';
+    display: block;
+    margin: 12px auto 0;
+    width: 60px;
+    height: 3px;
+    background-color: #CB6847;
+    border-radius: 2px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 80%;
+    z-index: 1;
+}
+
+input[type="text"],
+input[type="email"] {
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background-color: #DADADA;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+}
+
+.next-button {
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background-color: #CB6847;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 14px;
+    width: 80%;
+    margin: 30px 0 20px;
+}
+
+.divider hr {
+    flex-grow: 1;
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.social-icons img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #e4cce0;
+    padding: 6px;
+    background-color: white;
+    object-fit: contain;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+  }
+  
+  .shake {
+    animation: shake 0.3s;
+    border: 1px solid red;
+  }
+  

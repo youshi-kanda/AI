@@ -1,0 +1,305 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', sans-serif;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  body {
+    background-color: black;
+  }
+  
+  .back_ground {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100%;
+    background-color: #332E29;
+    border-radius: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
+  header {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #CB6847;
+    width: 100%;
+    height: 60px;
+    padding: 0 16px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-sizing: border-box;
+  }
+  
+  .back-button {
+    font-size: 36px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .title {
+    font-size: 28px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    flex-grow: 1;
+  }
+  
+  .kebab-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 24px;
+    width: 10px;
+    cursor: pointer;
+  }
+  
+  .kebab-menu span {
+    width: 6px;
+    height: 6px;
+    background-color: white;
+    border-radius: 50%;
+  }
+  
+  .main-layout {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-grow: 1;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 0 12px;
+    flex-wrap: wrap;
+  }
+  
+  .left-column {
+    max-width: 720px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  
+  .right-column {
+    flex: 1;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #1c1c1c;
+    border-radius: 12px;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  
+  .progress-container {
+    display: flex;
+    gap: 4px;
+    width: 90%;
+    max-width: 300px;
+    margin-top: 16px;
+  }
+  
+  .bar {
+    flex: 1;
+    height: 4px;
+    background-color: white;
+    border-radius: 2px;
+  }
+  
+  .bar.active {
+    background-color: #CB6847;
+  }
+  
+  .image-box {
+    width: 95%;
+    height: 240px;
+    max-width: 640px;
+    border-radius: 20px;
+    background-image: url("../image/AI面接官女性イラスト.jpeg");
+    background-size: cover;
+    background-position: center 20%;
+    background-repeat: no-repeat;
+    margin-top: 20px;
+  }
+  
+  /* ==== 吹き出し風チャット + アニメーション ==== */
+  .text-area {
+    position: relative;
+    background-color: #FFF8F0;
+    color: #333;
+    padding: 20px 24px;
+    border-radius: 20px;
+    max-width: 90%;
+    margin-top: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: center;
+    animation: fadeInUp 0.6s ease-out both;
+  }
+  
+  .text-area::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 30px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-bottom-color: #FFF8F0;
+  }
+  
+  .text-area p {
+    margin: 0;
+    white-space: pre-line;
+  }
+  
+  /* アニメーション定義 */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* ================================= */
+  
+  .next-button {
+    background-color: rgb(248, 174, 105);
+    color: white;
+    font-size: 28px;
+    width: 60px;
+    height: 60px;
+    border: 3px solid #CB6847;
+    border-radius: 50%;
+    margin: 24px auto 12px auto;
+    cursor: pointer;
+  }
+  
+  #choiceArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 12px;
+  }
+  
+  .choice-button {
+    width: 220px;
+    padding: 12px 0;
+    font-size: 16px;
+    border-radius: 20px;
+    border: 3px solid #CB6847;
+    background-color: rgb(248, 174, 105);
+    color: white;
+    cursor: pointer;
+  }
+  
+  #device-check video {
+    width: 100%;
+    max-width: 350px;
+    aspect-ratio: 4 / 3;
+    background-color: black;
+    border-radius: 12px;
+    margin-bottom: 10px;
+  }
+  
+  #device-check p {
+    color: white;
+    margin: 5px 0;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  #deviceCheckButton,
+  #toggleVideoButton,
+  #toggleMicButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 14px;
+    width: 80%;
+    max-width: 260px;
+  }
+  
+  #deviceCheckButton {
+    background-color: #CB6847;
+  }
+  
+  #toggleVideoButton {
+    background-color: #444;
+  }
+  
+  #toggleMicButton {
+    background-color: #555;
+  }
+  
+  #mic-level-container {
+    width: 100%;
+    height: 10px;
+    background-color: #555;
+    border-radius: 4px;
+    margin: 10px 0 16px 0;
+    overflow: hidden;
+    max-width: 300px;
+  }
+  
+  #mic-level {
+    height: 100%;
+    width: 0%;
+    background-color: #4CAF50;
+    transition: width 0.1s linear;
+  }
+  
+  /* レスポンシブ対応 */
+  @media screen and (max-width: 768px) {
+    .main-layout {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .right-column {
+      width: 100%;
+      padding: 16px;
+    }
+  
+    .text-area {
+      font-size: 15px;
+      padding: 16px;
+    }
+  
+    .image-box {
+      height: 180px;
+    }
+  
+    .next-button {
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+    }
+  
+    .progress-container {
+      max-width: 240px;
+    }
+  }
+  

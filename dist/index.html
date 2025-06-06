@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI面接官チャット</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .interview-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .character-area {
+            flex: 1;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="%23f0f8ff"/><rect x="100" y="100" width="600" height="400" fill="%23e6f3ff" stroke="%23b3d9ff" stroke-width="2"/><circle cx="400" cy="200" r="50" fill="%23ffb3ba"/><rect x="350" y="250" width="100" height="150" fill="%23bae1ff"/><text x="400" y="450" text-anchor="middle" font-size="16" fill="%23333">姫宮先輩</text></svg>') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .character-name {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .chat-area {
+            height: 300px;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message-display {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.95);
+            margin: 10px;
+            border-radius: 15px;
+            border: 3px solid #333;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 10px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .message.interviewer {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+        }
+
+        .message.user {
+            background: #f3e5f5;
+            border-left: 4px solid #9c27b0;
+            margin-left: 20px;
+        }
+
+        .message-sender {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .message-text {
+            line-height: 1.6;
+            color: #444;
+        }
+
+        .input-area {
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            background: white;
+        }
+
+        .send-button {
+            padding: 12px 20px;
+            background: #ff6b35;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .send-button:hover {
+            background: #e55a2b;
+        }
+
+        .send-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 10px;
+            font-style: italic;
+            color: #666;
+            background: #f0f0f0;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .typing-dots {
+            display: inline-block;
+        }
+
+        .typing-dots::after {
+            content: '';
+            animation: dots 1.5s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="interview-container">
+        <div class="character-area">
+            <div class="character-name">姫宮先輩</div>
+        </div>
+        
+        <div class="chat-area">
+            <div class="message-display" id="messageDisplay">
+                <div class="loading">面接官が準備中です...</div>
+            </div>
+            
+            <div class="typing-indicator" id="typingIndicator">
+                <span class="typing-dots">面接官が入力中</span>
+            </div>
+            
+            <div class="input-area">
+                <input 
+                    type="text" 
+                    class="chat-input" 
+                    id="chatInput" 
+                    placeholder="メッセージを入力してください..."
+                    maxlength="500"
+                >
+                <button class="send-button" id="sendButton">送信</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="dify_integration.js"></script>
+    <script>
+        class ChatInterview {
+            constructor() {
+                this.messageDisplay = document.getElementById('messageDisplay');
+                this.chatInput = document.getElementById('chatInput');
+                this.sendButton = document.getElementById('sendButton');
+                this.typingIndicator = document.getElementById('typingIndicator');
+                
+                this.messages = [];
+                this.isProcessing = false;
+                
+                // Initialize Dify API client
+                // Note: In production, API key should be stored securely
+                this.difyClient = new DifyAPIClient(
+                    'your-dify-api-key-here', // Replace with actual API key
+                    'https://api.dify.ai/v1'   // Replace with actual Dify endpoint
+                );
+                
+                this.init();
+            }
+            
+            init() {
+                this.sendButton.addEventListener('click', () => this.sendMessage());
+                this.chatInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        this.sendMessage();
+                    }
+                });
+                
+                // 初期メッセージを表示
+                setTimeout(() => {
+                    this.addMessage('interviewer', '姫宮先輩', 'えーっと......よし、じゃあ私達付き合っちゃおうか？');
+                    setTimeout(() => {
+                        this.addMessage('interviewer', '姫宮先輩', 'あ、すみません！面接を始めさせていただきます。まずは自己紹介をお願いします。');
+                    }, 2000);
+                }, 1000);
+            }
+            
+            async sendMessage() {
+                const message = this.chatInput.value.trim();
+                if (!message || this.isProcessing) return;
+                
+                this.addMessage('user', 'あなた', message);
+                this.chatInput.value = '';
+                this.setProcessing(true);
+                
+                try {
+                    const response = await this.getDifyResponse(message);
+                    setTimeout(() => {
+                        this.addMessage('interviewer', '姫宮先輩', response);
+                        this.setProcessing(false);
+                    }, 1500);
+                } catch (error) {
+                    console.error('Error getting response:', error);
+                    setTimeout(() => {
+                        this.addMessage('interviewer', '姫宮先輩', 'すみません、少し考えさせてください...');
+                        this.setProcessing(false);
+                    }, 1000);
+                }
+            }
+            
+            async getDifyResponse(userMessage) {
+                try {
+                    // Try to use Dify API first
+                    const result = await this.difyClient.sendMessage(userMessage);
+                    
+                    if (result.success) {
+                        return result.message;
+                    } else {
+                        console.warn('Dify API failed, using fallback responses:', result.error);
+                        return this.getFallbackResponse(userMessage);
+                    }
+                } catch (error) {
+                    console.error('Error calling Dify API:', error);
+                    return this.getFallbackResponse(userMessage);
+                }
+            }
+            
+            getFallbackResponse(userMessage) {
+                // Fallback responses when Dify API is not available
+                const responses = [
+                    'なるほど、とても興味深いですね。もう少し詳しく教えていただけますか？',
+                    'それは素晴らしい経験ですね。その時どのような気持ちでしたか？',
+                    'とても良い回答だと思います。次の質問に移らせていただきますね。',
+                    'あなたの強みについて教えてください。',
+                    'チームワークについてどのように考えていますか？',
+                    '将来の目標について聞かせてください。',
+                    'その経験から何を学びましたか？',
+                    '困難な状況をどのように乗り越えますか？',
+                    'チームで働く際に大切にしていることはありますか？'
+                ];
+                
+                return responses[Math.floor(Math.random() * responses.length)];
+            }
+            
+            addMessage(type, sender, text) {
+                const messageElement = document.createElement('div');
+                messageElement.className = `message ${type}`;
+                messageElement.innerHTML = `
+                    <div class="message-sender">${sender}</div>
+                    <div class="message-text">${text}</div>
+                `;
+                
+                if (this.messageDisplay.querySelector('.loading')) {
+                    this.messageDisplay.innerHTML = '';
+                }
+                
+                this.messageDisplay.appendChild(messageElement);
+                this.messageDisplay.scrollTop = this.messageDisplay.scrollHeight;
+                
+                this.messages.push({ type, sender, text, timestamp: new Date() });
+            }
+            
+            setProcessing(processing) {
+                this.isProcessing = processing;
+                this.sendButton.disabled = processing;
+                this.chatInput.disabled = processing;
+                
+                if (processing) {
+                    this.typingIndicator.style.display = 'block';
+                } else {
+                    this.typingIndicator.style.display = 'none';
+                }
+            }
+        }
+        
+        // Initialize the chat interview when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new ChatInterview();
+        });
+    </script>
+</body>
+</html>

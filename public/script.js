@@ -143,10 +143,15 @@ let avatarVideo   = null;
 let avatarAudio   = null;
 let isAvatarPlaying = false;
 
-const API_BASE    = "https://sirupha.tsuji-090.workers.dev";
+const API_BASE = (() => {
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    return "http://localhost:8787";
+  }
+  return "https://sirupha.tsuji-090.workers.dev";
+})();
 const TOKEN_KEY   = "accessToken";
 const REFRESH_KEY = "refreshToken";
-const MEDIA_API_BASE = "https://sirupha.tsuji-090.workers.dev/media/";
+const MEDIA_API_BASE = API_BASE + "/media/";
 // 簡易的なインメモリキャッシュ
 const apiCache = {
   data: new Map(),
@@ -1574,7 +1579,7 @@ try {
       contentText = cachedData;
     } else {
       // docIdを明確にパラメータとして含むURLを使用
-      const detailUrl = `https://sirupha.tsuji-090.workers.dev/files/detail?docId=${encodeURIComponent(docId)}`;
+      const detailUrl = `${API_BASE}/files/detail?docId=${encodeURIComponent(docId)}`;
       
       const res = await apiFetch(detailUrl);
       if (!res.ok) {
@@ -1710,7 +1715,7 @@ async function fetchConversationList() {
     
     // 会話一覧を取得
     const resp = await apiFetch(
-      `https://sirupha.tsuji-090.workers.dev/conversation-list?user=${encodeURIComponent(userName)}`,
+      `${API_BASE}/conversation-list?user=${encodeURIComponent(userName)}`,
       {
         method: "GET",
         timeout: 10000  // 10秒タイムアウト
@@ -1919,7 +1924,7 @@ async function fetchConversationHistory(convId, convName) {
     
     // 履歴取得API呼び出し
     const resp = await apiFetch(
-      `https://sirupha.tsuji-090.workers.dev/conversation-history?user=${encodeURIComponent(userName)}&conversation_id=${convId}`,
+      `${API_BASE}/conversation-history?user=${encodeURIComponent(userName)}&conversation_id=${convId}`,
       {
         method: "GET",
         timeout: 15000  // 15秒タイムアウト
@@ -2285,7 +2290,7 @@ async function tryRefresh() {
   if (!refresh) return false;
 
   try {
-    const resp = await fetch("https://sirupha.tsuji-090.workers.dev/app/api/token/refresh", {
+    const resp = await fetch(`${API_BASE}/app/api/token/refresh`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ refresh })
@@ -2395,7 +2400,7 @@ async function deleteFile(docId) {
   try {
     // ここでは、DELETEリクエストで削除を実行する例です。
     // ※エンドポイントのURLは、環境に合わせて修正してください。
-    const response = await apiFetch(`https://sirupha.tsuji-090.workers.dev/datasets/your_dataset_id/documents/${docId}`, {
+    const response = await apiFetch(`${API_BASE}/datasets/your_dataset_id/documents/${docId}`, {
       method: "DELETE"
     });
     if (!response.ok) {
@@ -2609,7 +2614,7 @@ function clearAllSystemMessages() {
 // API状態をチェックする関数
 async function checkApiStatus() {
   try {
-    const resp = await fetch("https://sirupha.tsuji-090.workers.dev/api-status", {
+    const resp = await fetch(`${API_BASE}/api-status`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

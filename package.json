@@ -4,6 +4,9 @@
   "type": "module",
   "scripts": {
     "setup": "node scripts/setup.js",
-    "start": "docker-compose up --build"
+    "start": "docker compose up --build"
+  },
+  "dependencies": {
+    "prompts": "^2.4.2"
   }
 }

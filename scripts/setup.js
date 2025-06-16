@@ -41,12 +41,41 @@ ALLOWED_ORIGINS=${responses.origins}
   fs.writeFileSync('workers/wrangler.toml', wranglerConfig);
   console.log('workers/wrangler.toml を更新しました');
 
-  // Wrangler Secret 登録
-  ['API_KEY','KNOWLEDGE_API_KEY','GCP_API_KEY','DATASET_ID','ALLOWED_ORIGINS']
-    .forEach(key => {
-      execSync(`cd workers && wrangler secret put ${key} --secret "${responses[key.toLowerCase()]}"`);
+  try {
+    execSync('which wrangler', { stdio: 'pipe' });
+  } catch (error) {
+    console.log('Wrangler CLI をインストール中...');
+    try {
+      execSync('npm install -g wrangler', { stdio: 'inherit' });
+      console.log('Wrangler CLI のインストールが完了しました');
+    } catch (installError) {
+      console.error('Wrangler CLI のインストールに失敗しました:', installError.message);
+      console.log('手動でインストールしてください: npm install -g wrangler');
+      console.log('ローカル開発は Docker Compose で可能です: npm run start');
+      return;
+    }
+  }
+
+  // Wrangler Secret 登録 (key mapping fix)
+  const secretMappings = {
+    'API_KEY': responses.apiKey,
+    'KNOWLEDGE_API_KEY': responses.knowledgeKey,
+    'GCP_API_KEY': responses.gcpKey,
+    'DATASET_ID': responses.datasetId,
+    'ALLOWED_ORIGINS': responses.origins
+  };
+
+  console.log('Cloudflare Secrets を設定中...');
+  Object.entries(secretMappings).forEach(([key, value]) => {
+    try {
+      execSync(`cd workers && echo "${value}" | wrangler secret put ${key}`, { stdio: 'inherit' });
       console.log(`${key} を Wrangler Secret として登録しました`);
-    });
+    } catch (error) {
+      console.error(`Failed to set secret ${key}:`, error.message);
+      console.log('注意: Cloudflare認証が必要です。wrangler login を実行してください。');
+      console.log('ローカル開発では Docker Compose を使用してください: npm run start');
+    }
+  });
 
   console.log('セットアップ完了：npm run start で環境を起動できます');
 })();

@@ -5,7 +5,7 @@ services:
     working_dir: /app
     volumes:
       - ./:/app
-    command: sh -c "cd public && npm install -g http-server && http-server -p 8080"
+    command: sh -c "npm install -g http-server && cd public && http-server -p 8080 --cors -c-1"
     ports:
       - "8080:8080"
   worker:
@@ -14,9 +14,11 @@ services:
     volumes:
       - ./:/app
     environment:
-      - CF_ACCOUNT_ID
-      - CF_ZONE_ID
-      - CF_API_SUBDOMAIN
-    command: sh -c "npm install -g @cloudflare/wrangler && wrangler dev"
+      - API_KEY=${API_KEY:-demo_api_key}
+      - KNOWLEDGE_API_KEY=${KNOWLEDGE_API_KEY:-demo_knowledge_key}
+      - GCP_API_KEY=${GCP_API_KEY:-demo_gcp_key}
+      - DATASET_ID=${DATASET_ID:-demo_dataset}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-http://localhost:8080}
+    command: sh -c "npm install -g wrangler && node ../scripts/local-worker.js"
     ports:
       - "8787:8787"

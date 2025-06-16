@@ -1,0 +1,16 @@
+# パッケージ雛形: workers/wrangler.toml
+
+# Cloudflare プロジェクト設定
+name = "<CF_PROJECT_NAME>"        # 任意のプロジェクト名
+main = "workers.js"
+compatibility_date = "2025-06-15"  # 発行日付
+type = "javascript"
+
+# 以下は配布先ユーザーが自身のアカウント情報に置き換え
+account_id = "<YOUR_ACCOUNT_ID>"   # Cloudflare Account ID
+workers_dev = false                  # true で *.workers.dev のみ使用
+
+[env.production]
+# 本番用 Route と Zone の設定
+route = "<API_SUBDOMAIN>/*"        # 例: api.example.com/*
+zone_id = "<YOUR_ZONE_ID>"         # 上記サブドメインに対応する Zone ID

@@ -3,6 +3,23 @@ import { createServer } from 'http';
 import fs from 'fs';
 import path from 'path';
 
+function getRequestBody(req) {
+  return new Promise((resolve, reject) => {
+    let body = '';
+    req.on('data', chunk => {
+      body += chunk.toString();
+    });
+    req.on('end', () => {
+      try {
+        resolve(body ? JSON.parse(body) : {});
+      } catch (error) {
+        reject(error);
+      }
+    });
+    req.on('error', reject);
+  });
+}
+
 const server = createServer(async (req, res) => {
   const corsHeaders = {
     'Access-Control-Allow-Origin': 'http://localhost:8080',
@@ -39,15 +56,64 @@ const server = createServer(async (req, res) => {
         message: 'Local development server running',
         environment: 'development'
       }));
+    } else if (url.pathname === '/chat-messages' && req.method === 'POST') {
+      const body = await getRequestBody(req);
+      console.log('Chat message received:', body.query);
+      
+      res.writeHead(200, {
+        ...corsHeaders,
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive'
+      });
+
+      const mockResponse = `こんにちは！ローカル開発環境でのテストメッセージを受信しました: "${body.query}"\n\nシルファーシステムが正常に動作しています。APIエンドポイントの接続確認が完了しました。`;
+      
+      const chunks = [
+        `data: {"event":"message","message_id":"msg_local_${Date.now()}","conversation_id":"conv_local_${Date.now()}","answer":"${mockResponse}","created_at":${Date.now()}}\n\n`,
+        `data: {"event":"message_end","message_id":"msg_local_${Date.now()}","conversation_id":"conv_local_${Date.now()}"}\n\n`
+      ];
+
+      let i = 0;
+      const sendChunk = () => {
+        if (i < chunks.length) {
+          res.write(chunks[i]);
+          i++;
+          setTimeout(sendChunk, 500);
+        } else {
+          res.end();
+        }
+      };
+      
+      setTimeout(sendChunk, 100);
+      
+    } else if (url.pathname === '/conversation-list' && req.method === 'GET') {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({
+        data: [],
+        has_more: false,
+        limit: 20,
+        total: 0
+      }));
+    } else if (url.pathname === '/conversation-history' && req.method === 'GET') {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({
+        data: [],
+        has_more: false,
+        limit: 20,
+        total: 0
+      }));
     } else {
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({
-        message: 'Local worker server - API endpoints will be implemented',
+        message: 'Local worker server - API endpoint not implemented',
         path: url.pathname,
-        method: req.method
+        method: req.method,
+        available_endpoints: ['/api-status', '/chat-messages', '/conversation-list', '/conversation-history']
       }));
     }
   } catch (error) {
+    console.error('Error handling request:', error);
     res.writeHead(500, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ error: error.message }));
   }

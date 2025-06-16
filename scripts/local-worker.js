@@ -68,24 +68,37 @@ const server = createServer(async (req, res) => {
       });
 
       const mockResponse = `こんにちは！ローカル開発環境でのテストメッセージを受信しました: "${body.query}"\n\nシルファーシステムが正常に動作しています。APIエンドポイントの接続確認が完了しました。`;
+      const messageId = `msg_local_${Date.now()}`;
+      const conversationId = body.conversation_id || `conv_local_${Date.now()}`;
       
-      const chunks = [
-        `data: {"event":"message","message_id":"msg_local_${Date.now()}","conversation_id":"conv_local_${Date.now()}","answer":"${mockResponse}","created_at":${Date.now()}}\n\n`,
-        `data: {"event":"message_end","message_id":"msg_local_${Date.now()}","conversation_id":"conv_local_${Date.now()}"}\n\n`
-      ];
-
-      let i = 0;
-      const sendChunk = () => {
-        if (i < chunks.length) {
-          res.write(chunks[i]);
-          i++;
-          setTimeout(sendChunk, 500);
+      const words = mockResponse.split('');
+      const chunkSize = 5;
+      const textChunks = [];
+      
+      for (let i = 0; i < words.length; i += chunkSize) {
+        textChunks.push(words.slice(i, i + chunkSize).join(''));
+      }
+      
+      console.log('Starting to send streaming response...');
+      
+      let chunkIndex = 0;
+      const sendNextChunk = () => {
+        if (chunkIndex < textChunks.length) {
+          const chunk = textChunks[chunkIndex];
+          const sseData = `data: {"answer":"${chunk}","message_id":"${messageId}","conversation_id":"${conversationId}"}\n\n`;
+          console.log(`Sending text chunk ${chunkIndex + 1}/${textChunks.length}:`, chunk);
+          res.write(sseData);
+          chunkIndex++;
+          setTimeout(sendNextChunk, 100);
         } else {
+          const endData = `data: {"event":"message_end","message_id":"${messageId}","conversation_id":"${conversationId}"}\n\n`;
+          console.log('Sending message_end event');
+          res.write(endData);
           res.end();
         }
       };
       
-      setTimeout(sendChunk, 100);
+      setTimeout(sendNextChunk, 200);
       
     } else if (url.pathname === '/conversation-list' && req.method === 'GET') {
       res.writeHead(200, { 'Content-Type': 'application/json' });

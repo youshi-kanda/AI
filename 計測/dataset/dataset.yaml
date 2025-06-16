@@ -1,0 +1,4 @@
+train: C:/Users/rockr/OneDrive/デスクトップ/AI/計測/dataset/images/train/
+val: C:/Users/rockr/OneDrive/デスクトップ/AI/計測/dataset/images/val/
+nc: 1
+names: ["sticker"]

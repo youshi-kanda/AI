@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>チャットフレーム</title>
+  <link rel="stylesheet" href="./css/chat1.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="back">
+        <!-- 左向きの矢印をテキストとして表示 -->
+        &lt;
+      </div>
+      <div class="avatar"></div>
+      <div class="message">候補者</div>
+      <div class="kebab-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>      
+    </div>
+    <div class="chat-area">
+      <div class="message center">today</div>
+      <div class="message left">何か質問はありますか？</div>
+      <div class="message right">はい<div class="timestamp">6:03</div>
+      </div>
+      <div class="message right">質問します<div class="timestamp">6:04</div>
+      </div>
+      <div class="message right">福利厚生は？<div class="timestamp">6:05</div>
+      </div>
+    </div>
+    <div class="input-area">
+      <button class="plus-button">
+        <i class="bi bi-plus"></i>
+      </button>
+      <input type="text" placeholder="メッセージを入力">
+      <label class="attachment-wrapper">
+        <span class="attachment-icon"><i class="bi bi-paperclip"></i></span>
+        <input type="file" class="file-input" id="fileInput" multiple>
+      </label>
+      <button class="send-button">
+        <i class="bi bi-send"></i>
+      </button>
+    </div>
+  </div>
+</body>
+
+</html>

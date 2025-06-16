@@ -1,0 +1,207 @@
+body {
+  background: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+.container {
+  width: 375px;
+  height: 812px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background: #e0f9f9;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: #59b8bc;
+  height: 80px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  padding: 0 16px;
+  color: white;
+  font-size: 18px;
+}
+
+.header .avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50px;
+  background: white;
+  margin-top: 10px;
+  margin-right: 10px;
+  /* ← この1行を追加するだけでOK！ */
+  margin-left: 12px;
+  /* ← backとの間隔を調整 */
+}
+
+.back{
+  margin-left: 10px;
+  font-size: 40px;
+  color: white;
+
+}
+
+.header .message{
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.kebab-menu {
+  display: flex;
+  margin-top: 10px;
+  margin-left: 150px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 24px;
+  width: 10px;
+  cursor: pointer;
+}
+
+.kebab-menu span {
+  display: white;
+  width: 6px;
+  height: 6px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.chat-area {
+  flex: 1;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+}
+
+.message {
+  max-width: 70%;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  position: relative;
+  display: inline-block;
+}
+
+.center {
+  background: #8edcdf;
+  align-self: center;
+}
+
+.left {
+  background: #b1e6e6;
+  align-self: flex-start;
+}
+
+.right {
+  background: #b9eef1;
+  align-self: flex-end;
+}
+
+.timestamp {
+  font-size: 10px;
+  color: #888;
+  text-align: right;
+  margin-top: 2px;
+}
+
+.input-area {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background: white;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 20px;
+  background: #f0f0f0;
+  outline: none;
+}
+
+.input-area button {
+  background: #b9eef1;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.plus-button {
+  width: 40px;
+  height: 40px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plus-button i {
+  color: white;
+  font-size: 20px;
+}
+
+
+.attachment-wrapper {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+}
+
+.attachment-icon {
+  font-size: 24px;
+  color: #555;
+  transition: color 0.3s;
+}
+
+.attachment-wrapper:hover .attachment-icon {
+  color: #007bff;
+  /* ホバーで青くする */
+}
+
+/* input[type=file]を見えなくする */
+.file-input {
+  display: none;
+}
+
+.send-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  /* アイコンとテキストを縦方向に中央揃え */
+  gap: 8px;
+  /* アイコンとテキストの間隔 */
+  justify-content: center;
+  /* 横方向も中央揃え */
+}
+
+.send-button i {
+  font-size: 18px;
+  /* アイコンのサイズ調整 */
+  vertical-align: middle;
+  /* アイコンの縦位置を調整 */
+}

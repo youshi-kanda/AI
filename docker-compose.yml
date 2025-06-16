@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  frontend:
+    image: node:16-alpine
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: sh -c "cd public && npm install -g http-server && http-server -p 8080"
+    ports:
+      - "8080:8080"
+  worker:
+    image: node:16-alpine
+    working_dir: /app/workers
+    volumes:
+      - ./:/app
+    environment:
+      - CF_ACCOUNT_ID
+      - CF_ZONE_ID
+      - CF_API_SUBDOMAIN
+    command: sh -c "npm install -g @cloudflare/wrangler && wrangler dev"
+    ports:
+      - "8787:8787"

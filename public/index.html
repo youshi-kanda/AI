@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>シルファー</title>
+  <!-- フォント -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- スタイルシート -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/js/all.min.js" integrity="sha512-1JkMy1LR9bTo3psH+H4SV5bO2dFylgOy+UJhMus1zF4VEFuZVu5lsi4I6iIndE4N9p01z1554ZDcvMSjMaqCBQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.3/dist/purify.min.js" defer></script>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header>
+    <div class="logo">
+      <span class="main-title">シルファー</span>
+      <span class="sub-title"></span>
+    </div>
+    <button id="history-button" class="icon-button">履歴</button>
+    <!-- メニューアイコンを右寄せ -->
+    <div class="menu-toggle" id="menu-toggle">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+    <nav id="header-nav" class="nav-menu">
+      <a href="https://nocecreative.com/" target="_blank">会社概要</a>
+      <a id="contact-mail-link" href="#" class="nav-link">お問い合わせ</a>
+      <a id="file-list-link" href="javascript:void(0)">ファイル一覧</a>
+    </nav>
+  </header>
+
+<!-- 左カラム(サイドバー) -->
+<aside id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <h2>会話一覧</h2>
+    <button id="conversation-refresh" class="refresh-btn">更新</button>
+  </div>
+
+  <button id="new-conversation-btn" class="new-conversation-btn">新規会話</button>
+
+  <ul id="conversation-list" class="conversation-list"></ul>
+
+</aside>
+
+<!-- サイドバー開閉ボタン -->
+<button id="sidebar-toggle" class="sidebar-toggle">
+  <i class="fa-solid fa-window-restore"></i>
+</button>
+
+  <!-- メインコンテナ(チャット画面) -->
+  <main id="chat-main" class="chat-main">
+    <div class="chat-container">
+      <div id="chat-messages" class="chat-messages"></div>
+      <div id="suggested-questions" class="suggested-questions"></div>
+      <div class="chat-input">
+        <button id="record-button"><i class="fa-solid fa-microphone"></i></button>
+        <textarea id="user-input" rows="1" placeholder="シルファーに聞く..."></textarea>
+        <button id="open-upload-modal-button"><i class="fa-solid fa-file-arrow-up"></i></button>
+        <button id="send-button"><i class="fa-solid fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </main>
+
+  <!-- 音声読み上げボタン -->
+  <button id="text-to-audio-button" style="display:none;">
+    <i class="fa-solid fa-volume-high"></i>
+  </button>
+
+<div id="upload-modal" class="modal-container" style="display: none;">
+  <div class="modal-content">
+    <h2>ファイルアップロード</h2>
+
+    <!-- 非表示のファイルinput -->
+    <input type="file" id="file-input" accept=".txt,.md,.pdf,.docx,.jpg,.png,.jpeg,.webp,.gif,.mp4,.mov,.mkv,.avi" style="display:none;" />
+    
+    <!-- ファイル名を表示するためのspan -->
+    <label for="file-input" class="custom-file-upload">
+      <span id="file-name">ファイルを選択（選択されていません）</span>
+    </label>
+
+    <div class="modal-buttons">
+      <button id="confirm-upload-button">アップロード</button>
+      <button id="close-upload-modal">キャンセル</button>
+    </div>
+  </div>
+</div>
+
+  <!-- ファイル一覧モーダル -->
+  <div id="file-list-modal" class="modal-container" style="display:none;">
+    <div class="modal-content">
+      <button id="close-file-list-modal" class="modal-close-button">&times;</button>
+      <h2>ファイル一覧</h2>
+      <ul id="file-list"></ul>
+    </div>
+  </div>
+
+<!-- ファイル詳細モーダル（閲覧・編集の両方を内包） -->
+<div id="file-detail-modal" class="file-detail-modal-container" style="display: none;">
+  <div class="file-detail-modal-content">
+    <button id="close-file-detail-modal" class="detail-close-button">&times;</button>
+    <h2>ファイル詳細</h2>
+
+    <!-- ボタンを上側に移動し、既存デザインに合わせる -->
+    <div class="modal-buttons" style="margin-bottom: 15px;">
+      <button id="toggle-edit-mode-button" class="modal-button">編集モード</button>
+      <button id="update-file-button" class="modal-button" style="display:none;">更新</button>
+    </div>
+
+    <!-- 閲覧用（初期表示） -->
+    <div id="file-detail-view" class="file-detail-text"></div>
+
+    <!-- 編集用（初期は非表示） -->
+    <textarea id="file-detail-edit" class="file-detail-textarea" style="display:none;"></textarea>
+</div>
+</div>
+
+
+  <!-- ポップアップ（引用などを表示） -->
+  <div id="popup-container" class="popup-container" style="display:none">
+    <div class="popup">
+      <button id="close-popup" class="popup-close">×</button>
+      <pre id="popup-text" class="popup-body"></pre> <!-- ← カード内に配置 -->
+    </div>
+    <div id="popup-overlay" class="popup-overlay"></div>
+  </div>
+
+  <!-- 会話履歴モーダル -->
+  <div id="history-modal" class="modal-container" style="display: none;">
+    <div class="modal-content">
+      <button id="close-history-modal" class="modal-close-button">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h2>会話履歴</h2>
+      <ul id="history-list"></ul>
+    </div>
+  </div>
+
+
+  <!-- marked.jsの設定 -->
+  <script>
+    marked.setOptions({
+      gfm: true,
+      breaks: true
+    });
+  </script>
+
+  <!-- フッター固定(会社名) -->
+  <footer id="site-footer">
+    &copy; Noce Creative
+  </footer>
+
+  <!-- サイドバー開閉などの簡易スクリプト -->
+  <script>
+const sidebarToggleBtn = document.getElementById('sidebar-toggle');
+const sidebar = document.getElementById('sidebar');
+
+function setSidebarInitialState() {
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    sidebar.classList.remove('collapsed'); // モバイルでは初期非表示
+    sidebarToggleBtn.style.left = '10px';
+  } else {
+    sidebar.classList.remove('collapsed');
+    sidebarToggleBtn.style.left = '250px';
+  }
+}
+
+// 初期状態セット
+window.addEventListener('load', setSidebarInitialState);
+window.addEventListener('resize', setSidebarInitialState);
+
+// トグル動作
+sidebarToggleBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('collapsed');
+
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    // モバイル時は常にボタン位置を固定
+    sidebarToggleBtn.style.left = '10px';
+  } else {
+    sidebarToggleBtn.style.left = sidebar.classList.contains('collapsed') ? '10px' : '250px';
+  }
+});
+
+
+    /* 新規会話ボタン (サンプル) */
+    const newConvBtn = document.getElementById('new-conversation-btn');
+    newConvBtn?.addEventListener('click', () => {
+      // API呼び出し等で会話を作成
+      // alert("新しい会話を作成しました。");
+    });
+
+const fileInput = document.getElementById("file-input");
+const fileNameSpan = document.getElementById("file-name");
+
+// ファイル選択時にファイル名を表示する処理
+fileInput.addEventListener("change", () => {
+  const fileName = fileInput.files[0]?.name || "ファイルを選択（選択されていません）";
+  fileNameSpan.textContent = fileName;
+});
+
+// モーダルを開くときにファイル名を初期化
+document.getElementById("open-upload-modal-button").addEventListener("click", () => {
+  fileNameSpan.textContent = "ファイルを選択（選択されていません）";
+  fileInput.value = "";
+});
+
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
